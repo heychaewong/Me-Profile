@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFE3EC"/>
+      <stop offset="1" stop-color="#DCE8FF"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="url(#bg)"/>
+  <!-- 임시 프로필: public/profile.jpg 를 넣고 src/data/profile.ts 의 photo 경로를 바꿔주세요 -->
+  <circle cx="256" cy="215" r="92" fill="#FFFFFF" opacity="0.92"/>
+  <path d="M96 512c10-110 80-170 160-170s150 60 160 170z" fill="#FFFFFF" opacity="0.92"/>
+  <circle cx="226" cy="212" r="9" fill="#4A4458"/>
+  <circle cx="286" cy="212" r="9" fill="#4A4458"/>
+  <circle cx="208" cy="240" r="13" fill="#F8B4C8" opacity="0.8"/>
+  <circle cx="304" cy="240" r="13" fill="#F8B4C8" opacity="0.8"/>
+  <path d="M244 242q12 12 24 0" stroke="#4A4458" stroke-width="5" fill="none" stroke-linecap="round"/>
+</svg>
