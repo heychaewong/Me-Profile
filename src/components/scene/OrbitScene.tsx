@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { Suspense, useEffect, useRef } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import { Billboard, ContactShadows, Html, useTexture } from '@react-three/drei';
 import { MathUtils, SRGBColorSpace, type Group } from 'three';
@@ -24,8 +24,11 @@ function useOrbitLayout() {
   const k = MathUtils.clamp(viewport.width / 8.6, 0.46, 1);
   const innerWidth = viewport.width / k;
   const a = Math.min(3.4, innerWidth * 0.42); // 가로 반지름
-  const b = a * (portrait ? 0.62 : 0.42); // 세로(깊이) 반지름
-  return { k, a, b };
+  // 세로 화면: 궤도를 원에 가깝게 + 카메라 쪽으로 기울여서 프로필 위아래로도 펫이 지나가게
+  const b = a * (portrait ? 1.05 : 0.42); // 깊이 반지름
+  const tilt = portrait ? 0.62 : 0; // 궤도면 기울기 (rad)
+  const petScale = portrait ? 1.2 : 1;
+  return { k, a, b, tilt, petScale, portrait };
 }
 
 interface OrbitSceneProps {
@@ -33,7 +36,7 @@ interface OrbitSceneProps {
 }
 
 export function OrbitScene({ onSelect }: OrbitSceneProps) {
-  const { k, a, b } = useOrbitLayout();
+  const { k, a, b, tilt, petScale, portrait } = useOrbitLayout();
   const hoveredSlug = useSceneStore((s) => s.hoveredSlug);
   const petRefs = useRef<(Group | null)[]>([]);
   const angle = useRef(0);
@@ -57,26 +60,33 @@ export function OrbitScene({ onSelect }: OrbitSceneProps) {
       if (!g) return;
       // 앞쪽(+z)에서 시작해 시계 반대 방향으로 고르게 배치
       const theta = angle.current + Math.PI / 2 + (i / pets.length) * Math.PI * 2;
-      g.position.set(Math.cos(theta) * a, ORBIT_Y, Math.sin(theta) * b);
+      g.position.set(Math.cos(theta) * a, 0, Math.sin(theta) * b);
     });
   });
 
   return (
     <group scale={k}>
-      <ProfileAvatar />
-      {pets.map((pet, i) => (
-        <group key={pet.slug} ref={(el) => void (petRefs.current[i] = el)}>
-          <OrbitPet pet={pet} index={i} onSelect={onSelect} />
-        </group>
-      ))}
-      <ContactShadows
-        position={[0, -1.25, 0]}
-        scale={12}
-        blur={2.6}
-        far={3}
-        opacity={0.22}
-        resolution={512}
-      />
+      {/* 사진이 로드되는 동안에도 펫은 먼저 보이도록 프로필만 따로 Suspense */}
+      <Suspense fallback={null}>
+        <ProfileAvatar />
+      </Suspense>
+      <group position={[0, ORBIT_Y, 0]} rotation={[tilt, 0, 0]}>
+        {pets.map((pet, i) => (
+          <group key={pet.slug} ref={(el) => void (petRefs.current[i] = el)}>
+            <OrbitPet pet={pet} index={i} baseScale={petScale} onSelect={onSelect} />
+          </group>
+        ))}
+      </group>
+      {!portrait && (
+        <ContactShadows
+          position={[0, ORBIT_Y - 1.1, 0]}
+          scale={12}
+          blur={2.6}
+          far={3}
+          opacity={0.22}
+          resolution={512}
+        />
+      )}
     </group>
   );
 }
@@ -84,10 +94,12 @@ export function OrbitScene({ onSelect }: OrbitSceneProps) {
 function OrbitPet({
   pet,
   index,
+  baseScale,
   onSelect,
 }: {
   pet: Pet;
   index: number;
+  baseScale: number;
   onSelect: (slug: string) => void;
 }) {
   const ref = useRef<Group>(null);
@@ -102,7 +114,7 @@ function OrbitPet({
     // 둥둥 떠다니기
     g.position.y = Math.sin(t * 1.6 + phase) * 0.12;
     g.rotation.z = Math.sin(t * 1.1 + phase) * 0.06;
-    const s = MathUtils.damp(g.scale.x, hovered ? HOVER_SCALE : 1, 10, delta);
+    const s = MathUtils.damp(g.scale.x, baseScale * (hovered ? HOVER_SCALE : 1), 10, delta);
     g.scale.setScalar(s);
     // 항상 카메라 쪽을 바라봄 (z 기울기는 유지)
     const rz = g.rotation.z;

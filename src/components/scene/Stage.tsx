@@ -1,6 +1,5 @@
 'use client';
 
-import { Suspense } from 'react';
 import { useRouter } from 'next/navigation';
 import { Canvas } from '@react-three/fiber';
 import { OrbitScene } from './OrbitScene';
@@ -15,16 +14,15 @@ export default function Stage() {
   return (
     <div className="stage" aria-hidden>
       <Canvas
+        flat // 톤매핑 끄기 → 파스텔 색이 탁해지지 않게
         dpr={[1, 2]}
         camera={{ position: [0, 1.5, 9], fov: 35 }}
         onCreated={({ camera }) => camera.lookAt(0, 0, 0)}
       >
-        <ambientLight intensity={1.15} />
-        <directionalLight position={[3, 5, 4]} intensity={1.7} />
+        <ambientLight intensity={1.0} />
+        <directionalLight position={[3, 5, 4]} intensity={1.3} />
         <directionalLight position={[-4, 2, -3]} intensity={0.5} color="#d6deff" />
-        <Suspense fallback={null}>
-          <OrbitScene onSelect={(slug) => router.push(`/${slug}`)} />
-        </Suspense>
+        <OrbitScene onSelect={(slug) => router.push(`/${slug}`)} />
       </Canvas>
     </div>
   );
