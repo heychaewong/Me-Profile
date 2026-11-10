@@ -61,26 +61,6 @@ export const pets: Pet[] = [
     ],
   },
   {
-    slug: 'cafe',
-    name: '모카',
-    persona: '카페 자아',
-    emoji: '☕',
-    color: '#F2D3B3',
-    cheek: '#F2A08C',
-    ears: 'round',
-    background: { light: '#FBF1E6', dark: '#3A2C22' },
-    lines: [
-      '반가워, 나는 모카야. 카페 자아를 맡고 있어.',
-      '새로운 동네에 가면 제일 먼저 카페 지도를 펼치게 하지.',
-      '내가 아끼는 카페들을 소개할게!',
-    ],
-    contents: [
-      { title: '카페 이름 1', subtitle: '동네 · 시그니처 메뉴', description: '이 카페가 좋은 이유를 적어주세요.', tags: ['디저트'] },
-      { title: '카페 이름 2', subtitle: '동네 · 시그니처 메뉴', description: '이 카페가 좋은 이유를 적어주세요.', tags: ['작업하기 좋은'] },
-      { title: '카페 이름 3', subtitle: '동네 · 시그니처 메뉴', description: '이 카페가 좋은 이유를 적어주세요.', tags: ['핸드드립'] },
-    ],
-  },
-  {
     slug: 'travel',
     name: '솔',
     persona: '여행 자아',
@@ -118,26 +98,6 @@ export const pets: Pet[] = [
       { title: '영화 제목 1', subtitle: '감독 · 연도', description: '이 영화를 좋아하는 이유를 적어주세요.', tags: ['드라마'] },
       { title: '영화 제목 2', subtitle: '감독 · 연도', description: '이 영화를 좋아하는 이유를 적어주세요.', tags: ['애니메이션'] },
       { title: '영화 제목 3', subtitle: '감독 · 연도', description: '이 영화를 좋아하는 이유를 적어주세요.', tags: ['SF'] },
-    ],
-  },
-  {
-    slug: 'game',
-    name: '픽셀',
-    persona: '게임 자아',
-    emoji: '🎮',
-    color: '#B8D8F8',
-    cheek: '#F2A7B8',
-    ears: 'pointy',
-    background: { light: '#E6F1FD', dark: '#1F2B3D' },
-    lines: [
-      '플레이어 등장! 나는 픽셀, 게임 자아야.',
-      '"딱 한 판만"을 열 판으로 만드는 게 내 특기지.',
-      '최애 게임들을 소개할게!',
-    ],
-    contents: [
-      { title: '게임 제목 1', subtitle: '플랫폼 · 장르', description: '이 게임을 좋아하는 이유를 적어주세요.', tags: ['인디'] },
-      { title: '게임 제목 2', subtitle: '플랫폼 · 장르', description: '이 게임을 좋아하는 이유를 적어주세요.', tags: ['협동'] },
-      { title: '게임 제목 3', subtitle: '플랫폼 · 장르', description: '이 게임을 좋아하는 이유를 적어주세요.', tags: ['퍼즐'] },
     ],
   },
 ];

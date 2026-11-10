@@ -6,7 +6,7 @@ import './globals.css';
 
 export const metadata: Metadata = {
   title: `${profile.name}의 취향 소개`,
-  description: '내 안의 다섯 자아가 소개하는 나의 취향',
+  description: '내 안의 세 자아가 소개하는 나의 취향',
 };
 
 export const viewport: Viewport = {
