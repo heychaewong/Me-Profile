@@ -7,6 +7,7 @@
   --surface-border: rgba(46, 42, 58, 0.08);
   --shadow: 0 6px 24px rgba(60, 40, 90, 0.1);
   --accent: #8f7ae0;
+  --bubble: #ffffff;
   color-scheme: light;
 }
 
@@ -18,7 +19,17 @@
   --surface-border: rgba(255, 255, 255, 0.08);
   --shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
   --accent: #b9a8f5;
+  --bubble: #262232;
   color-scheme: dark;
+}
+
+/* 펫 페이지에 있는 동안 배경을 펫 색으로 (PetBackdrop이 data-pet과 색 변수를 설정) */
+:root[data-pet] {
+  --bg: var(--pet-bg-light);
+}
+
+:root[data-pet][data-theme='dark'] {
+  --bg: var(--pet-bg-dark);
 }
 
 /* ───────── 기본 ───────── */
@@ -54,6 +65,19 @@ button {
   cursor: pointer;
   border: none;
   background: none;
+}
+
+/* 화면에는 안 보이고 스크린 리더만 읽는 텍스트 */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 :focus-visible {

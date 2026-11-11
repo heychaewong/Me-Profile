@@ -96,3 +96,8 @@ npm run build && npx next start -p 3457   # 백그라운드로 실행
   옛 서버가 새 HTML과 없는 청크를 섞어 보내서 캔버스가 빈 화면이 돼요.
 - **WebGL 인스턴스는 하나씩 찍어요.**
   여러 개를 동시에 돌리면 빈 화면이 나올 수 있어요.
+- **`--virtual-time-budget`은 정지 화면 확인용이에요.**
+  - 타이머는 진행되지만 렌더 프레임은 거의 돌지 않아요. 그래서 `useFrame` 애니메이션(전환, 궤도 회전)은 시작 상태로 찍혀요.
+  - 전환이나 클릭 흐름을 확인할 때는 프로젝트 밖(임시 폴더)에 `puppeteer-core`를 설치해서 확인해요.
+    설치된 Chrome을 `executablePath`로 지정하고, 실제 시간만큼 기다린 뒤 찍어요.
+  - 클릭 대상은 하단 칩 `a[href="/music"]`, 말풍선 버튼 `section[aria-label] button`, 돌아가기 `a[href="/"]`예요.
