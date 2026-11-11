@@ -41,6 +41,27 @@ export interface Pet {
 
 export const pets: Pet[] = [
   {
+    slug: 'about',
+    name: '토리',
+    persona: '기본 정보',
+    emoji: '🙋',
+    color: '#FFE08A',
+    cheek: '#F4A08C',
+    ears: 'pointy',
+    background: { light: '#FDF6E1', dark: '#3A3322' },
+    lines: [
+      '안녕! 나는 토리, 이 사람의 기본 정보를 맡고 있어.',
+      '다른 자아들을 만나기 전에, 이 사람이 어떤 사람인지 먼저 알려줄게.',
+      '아래에 기본 정보를 정리해 뒀어!',
+    ],
+    contents: [
+      { title: '이름', subtitle: '한 줄 소개', description: '이름과 나를 한 문장으로 소개해 주세요.' },
+      { title: '소속', subtitle: '학교 · 전공 / 회사 · 직무', description: '지금 하고 있는 일이나 공부를 적어주세요.' },
+      { title: '관심 분야', subtitle: '요즘 파고 있는 것', description: '관심 있는 기술이나 분야를 적어주세요.', tags: ['프론트엔드', '3D 웹'] },
+      { title: 'GitHub', subtitle: '@heychaewong', description: '만든 것들을 모아둔 곳이에요.', link: 'https://github.com/heychaewong' },
+    ],
+  },
+  {
     slug: 'music',
     name: '라라',
     persona: '음악 자아',
