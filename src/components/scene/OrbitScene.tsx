@@ -66,11 +66,12 @@ export function OrbitScene({ focusSlug, onSelect }: OrbitSceneProps) {
   const orbitRef = useRef<Group>(null);
   const petRefs = useRef<(Group | null)[]>([]);
   const angle = useRef(0);
-  const speed = useRef(ORBIT_SPEED);
+  // 초기값은 처음 들어온 URL 기준 → /music으로 바로 접속하면 전환이 끝난 상태에서 시작
+  const speed = useRef(focusSlug ? 0 : ORBIT_SPEED);
   /** 각 펫이 포커스 위치로 얼마나 이동했는지 (0 = 궤도, 1 = 포커스) */
-  const focusT = useRef<number[]>(pets.map(() => 0));
+  const focusT = useRef<number[]>(pets.map((p) => (p.slug === focusSlug ? 1 : 0)));
   /** 포커스 모드 진입 정도 (0 = 메인, 1 = 다른 펫·프로필이 완전히 사라짐) */
-  const hideT = useRef(0);
+  const hideT = useRef(focusSlug ? 1 : 0);
   const target = useMemo(() => new Vector3(), []);
 
   useEffect(() => {
@@ -169,9 +170,9 @@ function OrbitPet({ pet, index, baseScale, focused, interactive, turn, onSelect 
   const hovered = useSceneStore((s) => s.hoveredSlug === pet.slug);
   const setHovered = useSceneStore((s) => s.setHovered);
   const phase = index * 1.3;
-  const size = useRef(baseScale);
+  const size = useRef(focused ? 1 : baseScale);
   const talkAmp = useRef(0);
-  const yaw = useRef(0);
+  const yaw = useRef(focused ? turn : 0);
 
   useFrame(({ clock, camera }, delta) => {
     const g = ref.current;

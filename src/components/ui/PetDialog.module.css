@@ -73,6 +73,8 @@
   width: 2px;
   height: 1em;
   margin-left: 2px;
+  /* 실제 차지하는 너비를 0으로 → 문장이 꽉 찰 때 커서 때문에 줄이 넘어가지 않게 */
+  margin-right: -4px;
   vertical-align: -0.12em;
   background: currentColor;
   opacity: 0;
