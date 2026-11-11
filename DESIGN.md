@@ -30,6 +30,7 @@
 
 | slug | 이름 | 몸 색 | 볼 색 | 귀 | 배경 (light / dark) |
 |---|---|---|---|---|---|
+| about | 토리 | `#FFE08A` 버터 옐로 | `#F4A08C` | pointy | `#FDF6E1` / `#3A3322` |
 | music | 라라 | `#C9B6F2` 라벤더 | `#F4A6C0` | round | `#EEE7FC` / `#2A2340` |
 | travel | 솔 | `#B5E8D5` 민트 | `#F5A9A9` | pointy | `#E5F7F0` / `#1E3530` |
 | movie | 팝콘 | `#F7BFD0` 핑크 | `#EE8FA8` | long | `#FDEBF1` / `#3A2230` |
