@@ -1,15 +1,19 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { Canvas } from '@react-three/fiber';
+import { getPet } from '@/data/pets';
 import { OrbitScene } from './OrbitScene';
 
 /**
  * 루트 layout에 한 번만 렌더되는 3D 캔버스.
  * 라우트가 바뀌어도 언마운트되지 않으므로 화면 전환을 끊김 없이 애니메이션할 수 있어요.
+ * 어떤 펫에 포커스할지는 URL(/music 등)에서 결정해요 → 뒤로가기/새로고침과 항상 일치.
  */
 export default function Stage() {
   const router = useRouter();
+  const pathname = usePathname();
+  const focusSlug = getPet(pathname.split('/')[1])?.slug ?? null;
 
   return (
     <div className="stage" aria-hidden>
@@ -22,7 +26,7 @@ export default function Stage() {
         <ambientLight intensity={1.0} />
         <directionalLight position={[3, 5, 4]} intensity={1.3} />
         <directionalLight position={[-4, 2, -3]} intensity={0.5} color="#d6deff" />
-        <OrbitScene onSelect={(slug) => router.push(`/${slug}`)} />
+        <OrbitScene focusSlug={focusSlug} onSelect={(slug) => router.push(`/${slug}`)} />
       </Canvas>
     </div>
   );
